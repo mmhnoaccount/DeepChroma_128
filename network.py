@@ -279,8 +279,10 @@ class Generator(nn.Module):
 
     def _make_block_1(self, inplanes, planes):
         return nn.Sequential(
-            SEResNeXt._make_layer(self, BottleneckX, planes//4, 2, inplanes=inplanes),
-            nn.Conv2d(planes, planes, 3, 1, 1),
+            # SEResNeXt._make_layer(self, BottleneckX, planes//4, 2, inplanes=inplanes),
+            # nn.Conv2d(planes, planes, 3, 1, 1),
+            nn.Conv2d(inplanes, planes, 3, 1, 1),
+            nn.Conv2d(inplanes, planes, 3, 1, 1),
             nn.LeakyReLU(0.2),
             nn.PixelShuffle(2)
         )
@@ -321,39 +323,6 @@ class Generator(nn.Module):
 
         out1_prime = self.deconv4(concat_tensor)
         # print('out1_prime:', out1_prime.shape)
-
-        '''
-        out4_prime = self.deconv1(concat_tensor, Ref_tensor)
-
-        # ==============================
-        # Deconv layers
-
-
-        concat_tensor = torch.cat([out4_prime, out4], 1)
-        out3_prime = self.deconv2(concat_tensor, Ref_tensor)
-
-        concat_tensor = torch.cat([out3_prime, out3], 1)
-        out2_prime = self.deconv3(concat_tensor, Ref_tensor)
-
-        concat_tensor = torch.cat([out2_prime, out2], 1)
-        out1_prime = self.deconv4(concat_tensor, Ref_tensor)
-
-        concat_tensor = torch.cat([out1_prime, out1], 1)
-        full_output = self.deconv5(concat_tensor)
-
-        # ==============================
-        # out4_prime should be input of Guide Decoder
-        '''
-        '''
-        out4_prime =
-        
-        if self.net_opt['guide']:
-            decoder_output = self.deconv_for_decoder(out4_prime)
-        else:
-            decoder_output = full_output
-
-        return full_output, decoder_output
-        '''
         return out1_prime
 
 

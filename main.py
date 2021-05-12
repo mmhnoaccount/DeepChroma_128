@@ -44,7 +44,7 @@ def parse_args():
     parser.add_argument('--lrD', type=float, default=0.0002, help='Learning rate of tag2pix discriminator')
     #parser.add_argument('--lrD', type=float, default=0.00005, help='Learning rate of tag2pix discriminator')
     #parser.add_argument('--l2_lambda', type=float, default=3000, help='Coefficient of content loss')
-    parser.add_argument('--l2_lambda', type=float, default=500, help='Coefficient of content loss')
+    parser.add_argument('--l2_lambda', type=float, default=3000, help='Coefficient of content loss')
     parser.add_argument('--guide_beta', type=float, default=0.9, help='Coefficient of guide decoder')
     #parser.add_argument('--adv_lambda', type=float, default=1, help='Coefficient of adversarial loss')
     parser.add_argument('--beta1', type=float, default=0.5, help='Adam optimizer parameter')
