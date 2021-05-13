@@ -37,49 +37,6 @@ def set_seed(seed, print_log=True):
     torch.backends.cudnn.benchmark = False
 
 
-'''
-TrainSet_Pack = 'F:/train_set'
-Train_Cb_org = TrainSet_Pack + '/Cb_32_32/org'
-Train_Cr_org = TrainSet_Pack + '/Cr_32_32/org'
-Train_Luma = TrainSet_Pack + '/luma_32_32/CCLM'
-Train_Cb_CCLM = TrainSet_Pack + '/Cb_32_32/CCLM'
-Train_Cr_CCLM = TrainSet_Pack + '/Cr_32_32/CCLM'
-Train_QP = TrainSet_Pack + '/QP_32_32'
-
-Train_Cb_DM = TrainSet_Pack + '/Cb_32_32/DM'
-Train_Cr_DM = TrainSet_Pack + '/Cr_32_32/DM'
-Train_Cb_Ref = TrainSet_Pack + '/Cb_32_32/Ref'
-Train_Cr_Ref = TrainSet_Pack + '/Cr_32_32/Ref'
-
-
-TestSet_Pack = 'F:/test_set'
-Test_Cb_org = TestSet_Pack + '/Cb_32_32/org'
-Test_Cr_org = TestSet_Pack + '/Cr_32_32/org'
-Test_Luma = TestSet_Pack + '/luma_32_32/CCLM'
-Test_Cb_CCLM = TestSet_Pack + '/Cb_32_32/CCLM'
-Test_Cr_CCLM = TestSet_Pack + '/Cr_32_32/CCLM'
-Test_QP = TestSet_Pack + '/QP_32_32'
-
-Test_Cb_DM = TestSet_Pack + '/Cb_32_32/DM'
-Test_Cr_DM = TestSet_Pack + '/Cr_32_32/DM'
-Test_Cb_Ref = TestSet_Pack + '/Cb_32_32/Ref'
-Test_Cr_Ref = TestSet_Pack + '/Cr_32_32/Ref'
-
-
-VisualSet_pack = 'E:/visualize_set'
-Visualize_Cb_org = VisualSet_pack + '/train_visualize_22/Cb_32_32/org'
-Visualize_Cr_org = VisualSet_pack + '/train_visualize_22/Cr_32_32/org'
-Visualize_Luma = VisualSet_pack + '/train_visualize_22/luma_32_32/CCLM'
-Visualize_Cb_CCLM = VisualSet_pack + '/train_visualize_22/Cb_32_32/CCLM'
-Visualize_Cr_CCLM = VisualSet_pack + '/train_visualize_22/Cr_32_32/CCLM'
-Visualize_QP = VisualSet_pack + '/train_visualize_22/QP_32_32'
-
-Visualize_Cb_DM = VisualSet_pack + '/train_visualize_22/Cb_32_32/DM'
-Visualize_Cr_DM = VisualSet_pack + '/train_visualize_22/Cr_32_32/DM'
-Visualize_Cb_Ref = VisualSet_pack + '/train_visualize_22/Cb_32_32/Ref'
-Visualize_Cr_Ref = VisualSet_pack + '/train_visualize_22/Cr_32_32/Ref'
-'''
-
 TrainSet_Pack = 'E:/File/package_by_mmh/train_set_128'
 Train_Cb_org = TrainSet_Pack + '/origCb'
 Train_Cr_org = TrainSet_Pack + '/origCr'
@@ -100,8 +57,8 @@ Test_Luma = TestSet_Pack + '/Luma'
 Test_QP = TestSet_Pack + '/QPmask'
 
 
-#VisualSet_pack = 'E:/File/package_by_mmh/train_set_128/visualize_valid'
-VisualSet_pack = r'E:\File\package_by_mmh\train_set_128\visualize_valid\trainVisualize_set'
+VisualSet_pack = r'E:\File\package_by_mmh\train_set_128\visualize_valid\testVisualize_set'
+# VisualSet_pack = r'E:\File\package_by_mmh\train_set_128\visualize_valid\trainVisualize_set'
 Visualize_Cb_org = VisualSet_pack + '/origCb'
 Visualize_Cr_org = VisualSet_pack + '/origCr'
 Visualize_Cb_rec = VisualSet_pack + '/RecCb'
@@ -194,21 +151,6 @@ def catOrg(org_path, index, Train, Visualize=False):
             Cb_org_Matrix = readMatrix(Test_Cb_org + '/' + org_path[0][index], 32, 32)
             Cr_org_Matrix = readMatrix(Test_Cr_org + '/' + org_path[1][index], 32, 32)
     return np.concatenate((np.expand_dims(Cb_org_Matrix, 0), np.expand_dims(Cr_org_Matrix, 0)), 0)
-
-'''
-def catRef(Ref_path, index, Train, Visualize=False):
-    if Visualize:
-        Cb_Ref_Matrix = readRef(Visualize_Cb_Ref + '/' + Ref_path[2][index])
-        Cr_Ref_Matrix = readRef(Visualize_Cr_Ref + '/' + Ref_path[3][index])
-    else:
-        if Train:
-            Cb_Ref_Matrix = readRef(Train_Cb_Ref + '/' + Ref_path[2][index])
-            Cr_Ref_Matrix = readRef(Train_Cr_Ref + '/' + Ref_path[3][index])
-        else:
-            Cb_Ref_Matrix = readRef(Test_Cb_Ref + '/' + Ref_path[2][index])
-            Cr_Ref_Matrix = readRef(Test_Cr_Ref + '/' + Ref_path[3][index])
-    return np.concatenate((Cb_Ref_Matrix, Cr_Ref_Matrix), 1)
-'''
 
 class LumaAndChromaDataset(Dataset):
     def __init__(self, luma_path, chroma_path, qp_path, org_path, Train=False, seed=-1, **kwargs):

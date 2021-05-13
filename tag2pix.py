@@ -162,7 +162,7 @@ class tag2pix(object):
                     luma_in, chroma_in, qp_in, org_label = luma_in.to(self.device), chroma_in.to(self.device), qp_in.to(self.device), org_label.to(self.device)
 
                 # update D network
-                if iter % 5 == 0:
+                if iter % 10 == 0:
                     self.D_optimizer.zero_grad()
 
                     D_real = self.D(org_label)
@@ -310,7 +310,7 @@ class tag2pix(object):
             if self.gpu_mode:
                 luma_in, chroma_in, QP_in = luma_in.to(self.device), chroma_in.to(self.device), QP_in.to(self.device)
 
-            G_f = self.G(luma_in, chroma_in)
+            G_f = self.G(luma_in, chroma_in, QP_in)
 
             if self.gpu_mode:
                 G_f = G_f.cpu()

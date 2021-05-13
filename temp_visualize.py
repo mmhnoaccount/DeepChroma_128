@@ -195,27 +195,7 @@ if __name__ == '__main__':
     from loader.dataloader import visualize_Dataset
     from torch.utils.data import DataLoader
 
-    '''
-    Y = visualize_results_luma(r'E:\File\package_by_mmh\train_set_128\visualize_valid\Luma')
-    U_org = visualize_results_chroma(r'E:\File\package_by_mmh\train_set_128\visualize_valid\origCb')
-    V_org = visualize_results_chroma(r'E:\File\package_by_mmh\train_set_128\visualize_valid\origCr')
-
-    YUV_org = Save_IYUV420(Y, U_org, V_org)
-
-    path = './orig.yuv'
-    f = open(path, "wb")
-    YUV_org.tofile(f)
-    f.close()
-
-    U_LM = visualize_results_LM(r'E:\File\package_by_mmh\train_set_128\visualize_valid\RecCb')
-    V_LM = visualize_results_LM(r'E:\File\package_by_mmh\train_set_128\visualize_valid\RecCr')
-    YUV_LM = Save_IYUV420(Y, U_LM, V_LM)
-    path = './LM.yuv'
-    f = open(path, "wb")
-    YUV_LM.tofile(f)
-    f.close()
-    '''
-
+    compare_results = './compare_results/'
 
 
     net_opt = {
@@ -232,7 +212,8 @@ if __name__ == '__main__':
                   luma_dim=1, output_dim=2, layers=layers, net_opt=net_opt)
     G = nn.DataParallel(G)
     checkpoint = torch.load(
-        str(r'E:\File\package_by_mmh\DeepChroma\results\210511-224352\tag2pix_10_epoch.pkl'))  # 12000_per20
+        str(r'E:\File\package_by_mmh\DeepChroma\results\210512-222619\tag2pix_50_epoch.pkl'))  # 12000_per20
+    G.load_state_dict(checkpoint['G'])
 
     G.eval()
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -256,16 +237,37 @@ if __name__ == '__main__':
         # print(G_f.shape)
         # print(org_label.shape)
 
-        height = 1352
-        width = 1352
+        height = 1080
+        width = 1920
 
         luma = build_fullSize_Pic(luma_in[:, 0, :, :].view(visual.__len__(), 128, 128), height, width, Luma=True)
         pre_Cb = build_fullSize_Pic(G_f[:, 0, :, :].view(visual.__len__(), 32, 32), height, width)
         pre_Cr = build_fullSize_Pic(G_f[:, 1, :, :].view(visual.__len__(), 32, 32), height, width)
+        # pre_Cb = build_fullSize_Pic(org_label[:, 0, :, :].view(visual.__len__(), 32, 32), height, width)
+        # pre_Cr = build_fullSize_Pic(org_label[:, 1, :, :].view(visual.__len__(), 32, 32), height, width)
 
         pre_img = Save_IYUV420(luma, pre_Cb, pre_Cr)
 
-        path = './DeepPred.yuv'
+        path = compare_results + 'DeepPred.yuv'
         f = open(path, "wb")
         pre_img.tofile(f)
+        f.close()
+
+
+        # Y = visualize_results_luma(r'E:\File\package_by_mmh\train_set_128\visualize_valid\Luma')
+        U_org = visualize_results_chroma(r'E:\File\package_by_mmh\train_set_128\visualize_valid\testVisualize_set\origCb')
+        V_org = visualize_results_chroma(r'E:\File\package_by_mmh\train_set_128\visualize_valid\testVisualize_set\origCr')
+
+        YUV_org = Save_IYUV420(luma, U_org, V_org)
+        path = compare_results + 'orig.yuv'
+        f = open(path, "wb")
+        YUV_org.tofile(f)
+        f.close()
+
+        U_LM = visualize_results_LM(r'E:\File\package_by_mmh\train_set_128\visualize_valid\testVisualize_set\RecCb')
+        V_LM = visualize_results_LM(r'E:\File\package_by_mmh\train_set_128\visualize_valid\testVisualize_set\RecCr')
+        YUV_LM = Save_IYUV420(luma, U_LM, V_LM)
+        path = compare_results + 'LM.yuv'
+        f = open(path, "wb")
+        YUV_LM.tofile(f)
         f.close()
