@@ -282,6 +282,7 @@ class Generator(nn.Module):
             # SEResNeXt._make_layer(self, BottleneckX, planes//4, 2, inplanes=inplanes),
             # nn.Conv2d(planes, planes, 3, 1, 1),
             nn.Conv2d(inplanes, planes, 3, 1, 1),
+            nn.LeakyReLU(0.2),
             nn.Conv2d(inplanes, planes, 3, 1, 1),
             nn.LeakyReLU(0.2),
             nn.PixelShuffle(2)

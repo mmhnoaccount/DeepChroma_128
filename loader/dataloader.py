@@ -57,8 +57,8 @@ Test_Luma = TestSet_Pack + '/Luma'
 Test_QP = TestSet_Pack + '/QPmask'
 
 
-VisualSet_pack = r'E:\File\package_by_mmh\train_set_128\visualize_valid\testVisualize_set'
-# VisualSet_pack = r'E:\File\package_by_mmh\train_set_128\visualize_valid\trainVisualize_set'
+# VisualSet_pack = r'E:\File\package_by_mmh\train_set_128\visualize_valid\testVisualize_set'
+VisualSet_pack = r'E:\File\package_by_mmh\train_set_128\visualize_valid\trainVisualize_set'
 Visualize_Cb_org = VisualSet_pack + '/origCb'
 Visualize_Cr_org = VisualSet_pack + '/origCr'
 Visualize_Cb_rec = VisualSet_pack + '/RecCb'
