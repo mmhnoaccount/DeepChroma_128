@@ -20,7 +20,7 @@ layers = [6, 4, 3, 3]
 G = Generator(luma_size=128, chroma_size=32,
                            luma_dim=1, output_dim=2, layers=layers, net_opt=net_opt)
 G = nn.DataParallel(G)
-checkpoint = torch.load(str('E:/File/package_by_mmh/results/210509-214118_12000_per20/tag2pix_40_epoch.pkl'))  #12000_per20
+checkpoint = torch.load(str(r'E:\File\package_by_mmh\results\210514-154618_lr0.0002_9000_per10\tag2pix_60_epoch.pkl'))
 G.load_state_dict(checkpoint['G'])
 G = G.module
 device = torch.device("cpu")
@@ -41,4 +41,4 @@ example_QP = torch.zeros([1, 1, 32, 32])
 #traced_script_module = torch.jit.trace(model, (example_in, example_h0))
 #traced_script_module.save("Script_ccc_model_50.pt")
 traced_script_module = torch.jit.trace(G, (example_Luma, example_Chroma, example_QP))
-traced_script_module.save("E:/File/package_by_mmh/results/210509-214118_12000_per20/tag2pix_40_epoch.pt")  #12000_per20
+traced_script_module.save(r"E:\File\package_by_mmh\results\210514-154618_lr0.0002_9000_per10\tag2pix_60_epoch.pt")

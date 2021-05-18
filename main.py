@@ -40,8 +40,8 @@ def parse_args():
     #parser.add_argument('--tag_dump', default=TAG_FILE_PATH, help='Path of tag dictionary / metadata pickle file.')
     parser.add_argument('--load', type=str, default="", help='Path to load network weights (if non-empty)')
 
-    parser.add_argument('--lrG', type=float, default=0.00002, help='Learning rate of tag2pix generator')
-    parser.add_argument('--lrD', type=float, default=0.00002, help='Learning rate of tag2pix discriminator')
+    parser.add_argument('--lrG', type=float, default=0.0002, help='Learning rate of tag2pix generator')
+    parser.add_argument('--lrD', type=float, default=0.0002, help='Learning rate of tag2pix discriminator')
     #parser.add_argument('--lrD', type=float, default=0.00005, help='Learning rate of tag2pix discriminator')
     #parser.add_argument('--l2_lambda', type=float, default=3000, help='Coefficient of content loss')
     parser.add_argument('--l2_lambda', type=float, default=9000, help='Coefficient of content loss')

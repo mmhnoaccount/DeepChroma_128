@@ -212,7 +212,7 @@ if __name__ == '__main__':
                   luma_dim=1, output_dim=2, layers=layers, net_opt=net_opt)
     G = nn.DataParallel(G)
     checkpoint = torch.load(
-        str(r'E:\File\package_by_mmh\DeepChroma\results\210512-222619\tag2pix_50_epoch.pkl'))  # 12000_per20
+        str(r'E:\File\package_by_mmh\DeepChroma\results\210513-220906\tag2pix_60_epoch.pkl'))  # 12000_per20
     G.load_state_dict(checkpoint['G'])
 
     G.eval()
